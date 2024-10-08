@@ -1,0 +1,26 @@
+<view class="safe-area-inset-top">
+  <view class="page-container">
+    <view class="header">
+      <text class="title">读啥鸭</text>
+      <text class="subtitle">精选书单聚合</text>
+    </view>
+    <scroll-view scroll-y class="book-list-scroll">
+      <view wx:for="{{bookLists}}" wx:key="id" class="book-card" bindtap="goToDetail" data-id="{{item.id}}">
+        <view class="book-info">
+          <text class="book-title">{{item.title}}</text>
+          <text class="book-author">{{item.author}}</text>
+          <text class="book-description">{{item.description}}</text>
+          <view class="duck-review">
+            <text class="review-title">读啥鸭评价：</text>
+            <text class="review-content">{{item.duckReview}}</text>
+          </view>
+        </view>
+        <view class="book-rating">
+          <text class="rating-score">{{item.rating}}</text>
+          <text class="rating-count">{{item.ratingCount}}人评分</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="submit-btn" bindtap="goToSubmit">+</view>
+  </view>
+</view>

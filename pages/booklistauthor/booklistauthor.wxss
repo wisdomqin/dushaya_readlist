@@ -1,0 +1,56 @@
+.container {
+  padding: 40rpx 30rpx;
+}
+
+.author-info {
+  text-align: center;
+  margin-bottom: 48rpx;
+}
+
+.author-info image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.author-name {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 12rpx;
+}
+
+.author-bio {
+  font-size: 28rpx;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.book-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.book-rating {
+  text-align: right;
+}
+
+.rating-score {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #ffc107;
+}
+
+.rating-count {
+  font-size: 24rpx;
+  color: #adb5bd;
+}

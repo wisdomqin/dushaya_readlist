@@ -1,0 +1,20 @@
+<view class="safe-area-inset-top">
+  <view class="page-container">
+    <view class="author-info">
+      <image src="{{author.avatar}}" mode="aspectFill"></image>
+      <text class="author-name">{{author.name}}</text>
+      <text class="author-bio">{{author.bio}}</text>
+    </view>
+    <view class="book-list">
+      <view wx:for="{{bookLists}}" wx:key="id" class="book-card" bindtap="goToBookList" data-id="{{item.id}}">
+        <view class="book-info">
+          <text class="book-title">{{item.title}}</text>
+        </view>
+        <view class="book-rating">
+          <text class="rating-score">{{item.rating}}</text>
+          <text class="rating-count">{{item.ratingCount}}人评分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

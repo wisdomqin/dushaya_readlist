@@ -1,0 +1,127 @@
+page {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  padding: 40rpx 30rpx;
+}
+
+.header {
+  margin-bottom: 40rpx;
+  padding: 0 40rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.book-list-scroll {
+  flex: 1;
+  overflow: hidden;
+}
+
+.book-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 0 40rpx 50rpx;  /* 修改这里，添加左右边距 */
+  box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.book-author {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.book-description {
+  font-size: 26rpx;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+}
+
+.duck-review {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.review-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.review-content {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.book-rating {
+  margin-top: 30rpx;
+  text-align: right;
+}
+
+.rating-score {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #ffc107;
+}
+
+.rating-count {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 10rpx;
+}
+
+.submit-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.15);
+}
+
+.page-container {
+  padding-top: calc({{safeAreaTopHeight}}px + 40rpx);
+  padding-bottom: 120rpx;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}

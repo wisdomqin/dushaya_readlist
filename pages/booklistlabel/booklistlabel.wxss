@@ -1,0 +1,67 @@
+/* pages/booklistlabel/booklistlabel.wxss */
+
+.container {
+  padding: 40rpx 30rpx;
+}
+
+.tag-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 16rpx;
+}
+
+.tag-description {
+  font-size: 28rpx;
+  color: #6c757d;
+  margin-bottom: 48rpx;
+  line-height: 1.6;
+}
+
+.book-list {
+  /* 使用与首页相同的书单列表样式 */
+}
+
+.page-container {
+  padding-top: calc({{safeAreaTopHeight}}px + 20rpx);
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  padding-bottom: 40rpx;
+}
+
+.book-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 8rpx;
+}
+
+.book-author {
+  font-size: 26rpx;
+  color: #6c757d;
+}
+
+.book-rating {
+  text-align: right;
+}
+
+.rating-score {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #ffc107;
+}
+
+.rating-count {
+  font-size: 24rpx;
+  color: #adb5bd;
+}

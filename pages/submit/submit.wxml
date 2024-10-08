@@ -1,0 +1,16 @@
+<view class="page-container">
+  <image class="bg-image" src="/images/books-background.jpg" mode="aspectFill"></image>
+  <view class="content">
+    <view class="header">
+      <text class="title">分享您的书单</text>
+      <text class="subtitle">让更多人发现好书</text>
+    </view>
+    <form bindsubmit="submitBookList">
+      <view class="input-container">
+        <icon class="input-icon" type="search" size="20"></icon>
+        <input type="text" name="url" placeholder="请复制粘贴书单网址" class="input" />
+      </view>
+      <button form-type="submit" class="submit-btn">提交书单</button>
+    </form>
+  </view>
+</view>
