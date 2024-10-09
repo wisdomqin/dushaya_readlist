@@ -18,11 +18,24 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "compileWorklet": false
   },
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "cloudfunctionRoot": "cloudfunctions/",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+  "functions": [
+    {
+      "name": "processBookList",
+      "config": {
+        "timeout": 30,
+        "memorySize": 256
+      }
+    }
+  ],
+  "cloud": true
 }

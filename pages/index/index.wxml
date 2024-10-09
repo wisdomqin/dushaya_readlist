@@ -1,26 +1,38 @@
-<view class="safe-area-inset-top">
-  <view class="page-container">
-    <view class="header">
-      <text class="title">读啥鸭</text>
-      <text class="subtitle">精选书单聚合</text>
+<view class="page-container" style="{{containerStyle}}">
+  <view class="header">
+    <text class="title">读啥鸭</text>
+    <text class="subtitle">精选书单聚合</text>
+  </view>
+  <scroll-view 
+    scroll-y="true" 
+    class="book-list-container" 
+    bindscrolltolower="loadMore"
+    refresher-enabled="{{true}}"
+    refresher-threshold="{{100}}"
+    refresher-default-style="black"
+    refresher-background="#f5f5f5"
+    refresher-triggered="{{isRefreshing}}"
+    bindrefresherrefresh="onPullDownRefresh"
+  >
+    <view wx:if="{{bookLists.length === 0}}" class="no-data">
+      <text>暂无书单，快去添加吧！</text>
     </view>
-    <scroll-view scroll-y class="book-list-scroll">
-      <view wx:for="{{bookLists}}" wx:key="id" class="book-card" bindtap="goToDetail" data-id="{{item.id}}">
-        <view class="book-info">
-          <text class="book-title">{{item.title}}</text>
-          <text class="book-author">{{item.author}}</text>
-          <text class="book-description">{{item.description}}</text>
-          <view class="duck-review">
-            <text class="review-title">读啥鸭评价：</text>
-            <text class="review-content">{{item.duckReview}}</text>
-          </view>
-        </view>
-        <view class="book-rating">
-          <text class="rating-score">{{item.rating}}</text>
-          <text class="rating-count">{{item.ratingCount}}人评分</text>
+    <view wx:for="{{bookLists}}" wx:key="_id" class="book-card" bindtap="goToDetail" data-id="{{item._id}}">
+      <view class="book-info">
+        <text class="book-title">{{item.title}}</text>
+        <text class="book-author">作者：{{item.author}}</text>
+        <text class="book-description">简介：{{item.description}}</text>
+        <view class="book-tags">标签：{{item.tags}}</view>
+        <view class="duck-review">
+          <text class="review-title">读啥鸭评价：</text>
+          <text class="review-content">{{item.review}}</text>
         </view>
       </view>
-    </scroll-view>
-    <view class="submit-btn" bindtap="goToSubmit">+</view>
-  </view>
+      <view class="book-rating">
+        <text class="rating-score">{{item.rating ? item.rating : '无评价'}}</text>
+        <text class="rating-count" wx:if="{{item.ratingCount}}">{{item.ratingCount}}人评分</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="submit-btn" bindtap="goToSubmit">+</view>
 </view>

@@ -8,7 +8,7 @@
     <form bindsubmit="submitBookList">
       <view class="input-container">
         <icon class="input-icon" type="search" size="20"></icon>
-        <input type="text" name="url" placeholder="请复制粘贴书单网址" class="input" />
+        <input class="url-input" type="text" value="{{url}}" placeholder="请复制粘贴书单网址" bindinput="inputUrl" />
       </view>
       <button form-type="submit" class="submit-btn">提交书单</button>
     </form>
