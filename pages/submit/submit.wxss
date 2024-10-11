@@ -135,3 +135,85 @@ button {
   display: block;
   margin-bottom: 6rpx;
 }
+
+/* 在现有样式的基础上添加以下内容 */
+
+.confirmation {
+  margin-top: 30rpx;
+  max-height: 80vh; /* 设置最大高度 */
+  overflow-y: auto; /* 允许内容滚动 */
+  padding-right: 20rpx; /* 为滚动条留出空间 */
+}
+
+.book-info {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.info-item {
+  margin-bottom: 30rpx; /* 增加项目之间的间距 */
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.book-info input {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  background-color: #f9f9f9;
+  min-height: 80rpx; /* 增加输入框的最小高度 */
+  box-sizing: border-box;
+}
+
+.book-info textarea {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  background-color: #f9f9f9;
+  min-height: 240rpx; /* 显著增加文本区域的最小高度 */
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.book-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40rpx;
+  padding-bottom: 30rpx; /* 添加底部内边距 */
+}
+
+.cancel-btn, .confirm-btn {
+  width: 45%;
+  height: 90rpx; /* 增加按钮高度 */
+  line-height: 90rpx;
+  font-size: 32rpx; /* 稍微增加字体大小 */
+  border-radius: 45rpx; /* 调整圆角以匹配新的高度 */
+}
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.confirm-btn {
+  background-color: #333;
+  color: #fff;
+}

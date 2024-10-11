@@ -38,38 +38,48 @@ exports.main = async (event, context) => {
 
     const result = response.data.data.result;
 
-    // 尝试解析JSON
     try {
       console.log('开始解析返回的JSON数据');
       const bookListData = JSON.parse(result.answer.replace(/```json\n|\n```/g, ''));
-      console.log('解析后的书单数据:', bookListData);
+      console.log('解析后的书单数据:', JSON.stringify(bookListData, null, 2));
 
-      // 提取所需的五个字段
+      // 提取所需的字段，包括新增的"书单内容"
       const {
         "书单名称": title,
         "书单作者": author,
         "书单描述": description,
         "标签": tags,
-        "评价": review
+        "评价": review,
+        "书单内容": bookListContent // 新增字段
       } = bookListData;
 
+      console.log('提取的书单内容:', bookListContent);
+
       console.log('开始存储数据到数据库');
-      // 存储到数据库
+      // 存储到数据库，包括新增的"书单内容"字段
+      const dataToAdd = {
+        title,
+        author,
+        description,
+        tags,
+        review,
+        bookListContent, // 新增字段
+        url,
+        createdAt: db.serverDate()
+      };
+      console.log('准备添加到数据库的数据:', JSON.stringify(dataToAdd, null, 2));
+
       const addResult = await db.collection('bookLists').add({
-        data: {
-          title,
-          author,
-          description,
-          tags,
-          review,
-          url,
-          createdAt: db.serverDate()
-        }
+        data: dataToAdd
       });
 
       console.log('数据库添加结果:', addResult);
 
-      return { success: true, message: '书单添加成功', data: { title, author, description, tags, review } };
+      return { 
+        success: true, 
+        message: '书单添加成功', 
+        data: { title, author, description, tags, review, bookListContent } // 包含新字段在返回数据中
+      };
     } catch (parseError) {
       console.error('JSON解析失败:', parseError);
       return { success: false, message: result.answer };

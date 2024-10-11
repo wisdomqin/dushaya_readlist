@@ -1,20 +1,46 @@
-<view class="safe-area-inset-top">
-  <view class="page-container">
-    <text class="book-title">{{bookDetail.title}}</text>
-    <view class="book-tags">
-      <text wx:for="{{bookDetail.tags}}" wx:key="*this" class="tag" bindtap="goToTag" data-tag="{{item}}">{{item}}</text>
+<view class="page-container">
+  <scroll-view scroll-y class="scroll-view" style="height: 100vh;">
+    <view class="content">
+      <view class="logo-area">
+        <text class="logo-text">读啥鸭</text>
+        <view class="logo-placeholder"></view>
+      </view>
+      <view class="header">
+        <text class="book-title">{{bookDetail.title}}</text>
+        <view class="book-author" bindtap="goToAuthor">
+          <view class="author-avatar" style="background: {{authorAvatar}}"></view>
+          <text>{{bookDetail.author}}</text>
+        </view>
+      </view>
+      
+      <view class="book-tags">
+        <text wx:for="{{bookDetail.tags}}" wx:key="*this" class="tag" bindtap="goToTag" data-tag="{{item}}">{{item}}</text>
+      </view>
+      
+      <view class="section">
+        <text class="section-title">简介</text>
+        <text class="book-description">{{bookDetail.description}}</text>
+      </view>
+      
+      <view class="section">
+        <text class="section-title">读啥鸭评价</text>
+        <text class="book-review">{{bookDetail.review}}</text>
+      </view>
+      
+      <view class="book-rating">
+        <text class="rating-score">{{bookDetail.rating}}</text>
+        <text class="rating-count">{{bookDetail.ratingCount}}人评分</text>
+      </view>
+      
+      <view class="section">
+        <text class="section-title">书单内容</text>
+        <text class="book-list">{{bookDetail.bookListContent}}</text>
+      </view>
+      
+      <view class="button-group">
+        <button class="primary-btn" bindtap="goToSource">查看源地址</button>
+        <button class="secondary-btn" bindtap="showRatingModal">评分</button>
+      </view>
     </view>
-    <view class="book-author" bindtap="goToAuthor">
-      <image src="{{bookDetail.authorAvatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
-      <text>{{bookDetail.author}}</text>
-    </view>
-    <text class="book-description">{{bookDetail.description}}</text>
-    <text class="book-review">读啥鸭评价：{{bookDetail.review}}</text>
-    <view class="book-rating">
-      <text class="rating-score">{{bookDetail.rating}}</text>
-      <text class="rating-count">{{bookDetail.ratingCount}}人评分</text>
-    </view>
-    <button bindtap="goToSource">源地址</button>
-    <button bindtap="showRatingModal">评分</button>
-  </view>
+  </scroll-view>
 </view>

@@ -1,7 +1,0 @@
-<view class="container">
-  <text class="tag-name">{{tag.name}}</text>
-  <text class="tag-description">{{tag.description}}</text>
-  <view class="book-list">
-    <!-- 相关书单列表，样式同书单列表页 -->
-  </view>
-</view>

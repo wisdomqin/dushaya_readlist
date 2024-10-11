@@ -4,6 +4,7 @@
     "pages/submit/submit",
     "pages/booklistlabel/booklistlabel",
     "pages/booklistinfo/booklistinfo",
+    "pages/web-view/web-view",
     "pages/booklistauthor/booklistauthor"
   ],
   "window": {
@@ -27,5 +28,8 @@
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
-  "cloud": true
+  "cloud": true,
+  "permission": {
+    "scope.vibrate": {}
+  }
 }
