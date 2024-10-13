@@ -24,7 +24,7 @@
           <text class="book-title">{{item.title}}</text>
           <view class="book-grade-container">
             <view class="grade-image-container">
-              <image class="grade-image" src="/images/{{item.grade === '典藏' ? 'classic.png' : item.grade === '神书' ? 'god.png' : item.grade === '普通' ? 'simple.png' : item.grade === '有意思' ? 'interesting.png' : 'default.png'}}" mode="aspectFit"></image>
+              <image class="grade-image" src="/images/{{item.grade === '经典' ? 'classic.png' : item.grade === '神书' ? 'god.png' : item.grade === '普通' ? 'simple.png' : item.grade === '有意思' ? 'interesting.png' : 'default.png'}}" mode="aspectFit"></image>
             </view>
             <view class="book-grade">{{item.grade || '无评级'}}</view>
           </view>

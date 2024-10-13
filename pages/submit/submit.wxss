@@ -13,20 +13,50 @@ button {
   width: 100%;
 }
 
-.page-container {
-  height: 100vh;
+.safe-area-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f4f8;
+  flex-direction: column;
+  background-color: #e2ecf7;
   background-image: 
-    linear-gradient(0deg, transparent 24%, rgba(100, 100, 100, 0.15) 25%, rgba(100, 100, 100, 0.15) 26%, transparent 27%, transparent 74%, rgba(100, 100, 100, 0.15) 75%, rgba(100, 100, 100, 0.15) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, rgba(100, 100, 100, 0.15) 25%, rgba(100, 100, 100, 0.15) 26%, transparent 27%, transparent 74%, rgba(100, 100, 100, 0.15) 75%, rgba(100, 100, 100, 0.15) 76%, transparent 77%, transparent);
-  background-size: 60px 60px;
+    linear-gradient(to right, rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(100, 100, 100, 0.1) 1px, transparent 1px),
+    radial-gradient(circle, #4a90e2 2px, transparent 2px),
+    linear-gradient(135deg, #84d0ff 0%, #4a90e2 100%);
+  background-size: 
+    20px 20px,
+    20px 20px,
+    60px 60px,
+    100% 100%;
+  background-position: 
+    0 0,
+    0 0,
+    30px 30px,
+    0 0;
+  z-index: 0;
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  padding: 20rpx 0;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
 }
 
 .bg-image {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -36,9 +66,13 @@ button {
 .content {
   width: 85%;
   padding: 60rpx 40rpx;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 30rpx;
-  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20rpx 40rpx rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  margin: auto;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
 }
 
 .header {
@@ -138,23 +172,30 @@ button {
 
 /* 在现有样式的基础上添加以下内容 */
 
+.confirmation-scroll {
+  width: 100%;
+  height: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
 .confirmation {
-  margin-top: 30rpx;
-  max-height: 80vh; /* 设置最大高度 */
-  overflow-y: auto; /* 允许内容滚动 */
-  padding-right: 20rpx; /* 为滚动条留出空间 */
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
 }
 
 .book-info {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 30rpx;
   border-radius: 15rpx;
   margin-bottom: 30rpx;
   box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
 }
 
 .info-item {
-  margin-bottom: 30rpx; /* 增加项目之间的间距 */
+  margin-bottom: 30rpx;
 }
 
 .info-label {
@@ -165,55 +206,106 @@ button {
   display: block;
 }
 
-.book-info input {
-  width: 100%;
-  border: 1px solid #e0e0e0;
-  border-radius: 8rpx;
-  padding: 20rpx;
-  font-size: 28rpx;
-  background-color: #f9f9f9;
-  min-height: 80rpx; /* 增加输入框的最小高度 */
-  box-sizing: border-box;
-}
-
+.book-info input,
 .book-info textarea {
   width: 100%;
   border: 1px solid #e0e0e0;
   border-radius: 8rpx;
   padding: 20rpx;
   font-size: 28rpx;
-  background-color: #f9f9f9;
-  min-height: 240rpx; /* 显著增加文本区域的最小高度 */
-  line-height: 1.5;
+  background-color: rgba(249, 249, 249, 0.9);
+  min-height: 80rpx;
   box-sizing: border-box;
 }
 
-.book-title {
-  font-size: 32rpx;
-  font-weight: bold;
+.book-info textarea {
+  min-height: 240rpx;
+  line-height: 1.5;
 }
 
 .button-group {
   display: flex;
   justify-content: space-between;
   margin-top: 40rpx;
-  padding-bottom: 30rpx; /* 添加底部内边距 */
+  padding-bottom: 30rpx;
 }
 
 .cancel-btn, .confirm-btn {
   width: 45%;
-  height: 90rpx; /* 增加按钮高度 */
+  height: 90rpx;
   line-height: 90rpx;
-  font-size: 32rpx; /* 稍微增加字体大小 */
-  border-radius: 45rpx; /* 调整圆角以匹配新的高度 */
+  font-size: 32rpx;
+  border-radius: 45rpx;
 }
 
 .cancel-btn {
-  background-color: #f0f0f0;
+  background-color: rgba(240, 240, 240, 0.9);
   color: #333;
 }
 
 .confirm-btn {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.9);
   color: #fff;
+}
+
+/* ... 保留原有的样式 ... */
+
+.grade-item {
+  position: relative;
+  margin-bottom: 40rpx;
+  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
+
+.grade-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20rpx;
+}
+
+.book-grade {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+
+.grade-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200rpx;  /* 增加尺寸 */
+  height: 200rpx; /* 增加尺寸 */
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.badge-image {
+  width: 220rpx;  /* 增加尺寸 */
+  height: 220rpx; /* 增加尺寸 */
+  object-fit: contain;
+}
+
+/* 为评级输入框添加特殊样式 */
+.grade-content .book-input {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #4a90e2;
+  border-radius: 10rpx;
+  padding: 10rpx 20rpx;
+  font-size: 30rpx;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.grade-content .book-input:focus {
+  box-shadow: 0 0 10rpx rgba(74, 144, 226, 0.5);
 }

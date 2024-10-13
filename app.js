@@ -9,6 +9,17 @@ App({
 
   onLaunch: async function () {
     console.log('App onLaunch 开始');
+    
+    // 获取系统信息
+    const systemInfo = wx.getSystemInfoSync();
+    this.globalData.statusBarHeight = systemInfo.statusBarHeight;
+
+    // 获取胶囊按钮位置信息
+    const menuButtonInfo = wx.getMenuButtonBoundingClientRect();
+    
+    // 计算导航栏高度
+    this.globalData.navBarHeight = (menuButtonInfo.top - systemInfo.statusBarHeight) * 2 + menuButtonInfo.height;
+
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
       return;
@@ -29,6 +40,7 @@ App({
     }
   },
 
+  // 保留原有的 initCloud 方法
   initCloud: function(retryCount = 0) {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');

@@ -28,29 +28,71 @@
   line-height: 1.6;
 }
 
-.book-card {
+.page-container {
+  height: 100vh;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.scroll-view {
+  flex: 1;
+  overflow: hidden;
+}
+
+.book-list {
+  padding: 20rpx;
+}
+
+.book-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .book-title {
-  font-size: 32rpx;
+  font-size: 36rpx;
   font-weight: 600;
-  color: #343a40;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.book-author {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.book-description {
+  font-size: 26rpx;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
 }
 
 .book-rating {
+  margin-top: 30rpx;
   text-align: right;
 }
 
 .rating-score {
-  font-size: 36rpx;
+  font-size: 40rpx;
   font-weight: 700;
   color: #ffc107;
 }
 
 .rating-count {
   font-size: 24rpx;
-  color: #adb5bd;
+  color: #999;
+  margin-left: 10rpx;
 }

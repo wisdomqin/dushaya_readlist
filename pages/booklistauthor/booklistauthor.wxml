@@ -1,20 +1,24 @@
-<view class="safe-area-inset-top">
-  <view class="page-container">
+<safe-area-top></safe-area-top>
+<view class="page-container">
+  <scroll-view scroll-y class="scroll-view" style="height: calc(100vh - {{safeAreaTopHeight}}px);">
     <view class="author-info">
-      <image src="{{author.avatar}}" mode="aspectFill"></image>
-      <text class="author-name">{{author.name}}</text>
-      <text class="author-bio">{{author.bio}}</text>
+      <text class="author-name">{{author}}</text>
     </view>
     <view class="book-list">
-      <view wx:for="{{bookLists}}" wx:key="id" class="book-card" bindtap="goToBookList" data-id="{{item.id}}">
+      <view wx:if="{{bookLists.length === 0}}" class="no-books">
+        该作者暂无书单
+      </view>
+      <view wx:for="{{bookLists}}" wx:key="_id" class="book-card" bindtap="goToBookList" data-id="{{item._id}}">
         <view class="book-info">
           <text class="book-title">{{item.title}}</text>
+          <text class="book-author">{{item.author}}</text>
+          <text class="book-description">简介：{{item.description}}</text>
         </view>
         <view class="book-rating">
-          <text class="rating-score">{{item.rating}}</text>
-          <text class="rating-count">{{item.ratingCount}}人评分</text>
+          <text class="rating-score">{{item.rating || '暂无评分'}}</text>
+          <text class="rating-count" wx:if="{{item.ratingCount}}">{{item.ratingCount}}人评分</text>
         </view>
       </view>
     </view>
-  </view>
+  </scroll-view>
 </view>

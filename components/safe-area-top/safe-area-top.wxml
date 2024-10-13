@@ -1,0 +1,2 @@
+<!-- components/safe-area-top/safe-area-top.wxml -->
+<view style="height: {{height}}px;"></view>

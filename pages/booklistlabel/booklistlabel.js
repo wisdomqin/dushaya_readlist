@@ -1,4 +1,5 @@
 const app = getApp();
+const db = wx.cloud.database();
 
 Page({
   data: {
@@ -12,17 +13,27 @@ Page({
     });
 
     const tag = options.tag;
-    // 模拟从API获取数据
     this.setData({
       tag: {
         name: tag,
         description: `与"${tag}"相关的精选书单合集。`
-      },
-      bookLists: [
-        {id: 1, title: "2023年度最佳科幻小说", author: "科幻迷小王", rating: 9.2, ratingCount: 328},
-        {id: 2, title: "经典科幻必读清单", author: "科幻评论家", rating: 9.5, ratingCount: 512},
-        {id: 3, title: "硬科幻佳作选", author: "物理学爱好者", rating: 8.9, ratingCount: 246}
-      ]
+      }
+    });
+    this.fetchTaggedBookLists(tag);
+  },
+
+  fetchTaggedBookLists(tag) {
+    wx.showLoading({ title: '加载中...' });
+    
+    db.collection('bookLists').where({
+      tags: db.command.all([tag])
+    }).get().then(res => {
+      this.setData({ bookLists: res.data });
+      wx.hideLoading();
+    }).catch(err => {
+      console.error('获取标签书单失败：', err);
+      wx.hideLoading();
+      wx.showToast({ title: '获取数据失败', icon: 'none' });
     });
   },
 

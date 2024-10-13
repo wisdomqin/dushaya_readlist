@@ -31,5 +31,8 @@
   "cloud": true,
   "permission": {
     "scope.vibrate": {}
+  },
+  "usingComponents": {
+    "safe-area-top": "/components/safe-area-top/safe-area-top"
   }
 }

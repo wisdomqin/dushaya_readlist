@@ -1,40 +1,59 @@
-<view class="page-container">
-  <image class="bg-image" src="/images/books-background.jpg" mode="aspectFill"></image>
-  <view class="content">
-    <view class="header">
-      <text class="title">分享您的书单</text>
-      <text class="subtitle">让更多人发现好书</text>
+<view class="safe-area-container">
+  <safe-area-top></safe-area-top>
+  <view class="page-container">
+    <view class="content" wx:if="{{!showConfirmation}}">
+      <view class="header">
+        <text class="title">分享您的书单</text>
+        <text class="subtitle">让更多人发现好书</text>
+      </view>
+      <form bindsubmit="submitBookList">
+        <view class="input-container">
+          <icon class="input-icon" type="search" size="20"></icon>
+          <input class="url-input" type="text" value="{{url}}" placeholder="请复制粘贴书单网址" bindinput="inputUrl" />
+        </view>
+        <button form-type="submit" class="submit-btn">提交书单</button>
+      </form>
     </view>
-    <form bindsubmit="submitBookList" wx:if="{{!showConfirmation}}">
-      <view class="input-container">
-        <icon class="input-icon" type="search" size="20"></icon>
-        <input class="url-input" type="text" value="{{url}}" placeholder="请复制粘贴书单网址" bindinput="inputUrl" />
+    <scroll-view scroll-y class="confirmation-scroll" wx:if="{{showConfirmation}}">
+      <view class="confirmation">
+        <view class="book-info">
+          <view class="info-item grade-item">
+            <text class="info-label">评级：</text>
+            <view class="grade-content">
+              <view class="book-grade">{{bookData.grade}}</view>
+              <view class="grade-badge {{bookData.grade ? 'show' : ''}}">
+                <image class="badge-image" src="/images/{{bookData.grade === '典藏' ? 'classic.png' : bookData.grade === '神' ? 'god.png' : bookData.grade === '普通' ? 'simple.png' : bookData.grade === '有意思' ? 'interesting.png' : 'default.png'}}" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+          <!-- 读啥鸭评价 -->
+          <view class="info-item">
+            <text class="info-label">读啥鸭评价：</text>
+            <view class="book-review">{{bookData.review}}</view>
+          </view>
+          <!-- 可编辑字段 -->
+          <view class="info-item">
+            <text class="info-label">书单名称：</text>
+            <input class="book-title" value="{{bookData.title}}" bindinput="updateBookData" data-field="title" placeholder="请输入书名" />
+          </view>
+          <view class="info-item">
+            <text class="info-label">书单作者：</text>
+            <input class="book-author" value="{{bookData.author}}" bindinput="updateBookData" data-field="author" placeholder="请输入作者" />
+          </view>
+          <view class="info-item">
+            <text class="info-label">简介：</text>
+            <textarea class="book-description" value="{{bookData.description}}" bindinput="updateBookData" data-field="description" placeholder="请输入简介" auto-height />
+          </view>
+          <view class="info-item">
+            <text class="info-label">标签：</text>
+            <input class="book-tags" value="{{bookData.tags}}" bindinput="updateBookData" data-field="tags" placeholder="请输入标签，用逗号分隔" />
+          </view>
+        </view>
+        <view class="button-group">
+          <button class="cancel-btn" bindtap="cancelSubmit">取消</button>
+          <button class="confirm-btn" bindtap="confirmSubmit">确认</button>
+        </view>
       </view>
-      <button form-type="submit" class="submit-btn">提交书单</button>
-    </form>
-    <view class="confirmation" wx:if="{{showConfirmation}}">
-      <view class="book-info">
-        <view class="info-item">
-          <text class="info-label">书名：</text>
-          <input class="book-title" value="{{bookData.title}}" bindinput="updateBookData" data-field="title" placeholder="请输入书名" />
-        </view>
-        <view class="info-item">
-          <text class="info-label">作者：</text>
-          <input class="book-author" value="{{bookData.author}}" bindinput="updateBookData" data-field="author" placeholder="请输入作者" />
-        </view>
-        <view class="info-item">
-          <text class="info-label">简介：</text>
-          <textarea class="book-description" value="{{bookData.description}}" bindinput="updateBookData" data-field="description" placeholder="请输入简介" auto-height />
-        </view>
-        <view class="info-item">
-          <text class="info-label">标签：</text>
-          <input class="book-tags" value="{{bookData.tags}}" bindinput="updateBookData" data-field="tags" placeholder="请输入标签，用逗号分隔" />
-        </view>
-      </view>
-      <view class="button-group">
-        <button class="cancel-btn" bindtap="cancelSubmit">取消</button>
-        <button class="confirm-btn" bindtap="confirmSubmit">确认</button>
-      </view>
-    </view>
+    </scroll-view>
   </view>
 </view>

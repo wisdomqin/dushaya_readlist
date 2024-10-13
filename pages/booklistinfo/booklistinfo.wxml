@@ -1,16 +1,21 @@
+<safe-area-top></safe-area-top>
 <view class="page-container">
-  <scroll-view scroll-y class="scroll-view" style="height: 100vh;">
+  <scroll-view scroll-y class="scroll-view" style="height: calc(100vh - 120rpx);">
     <view class="content">
-      <view class="logo-area">
-        <text class="logo-text">读啥鸭</text>
-        <view class="logo-placeholder"></view>
-      </view>
       <view class="header">
         <text class="book-title">{{bookDetail.title}}</text>
         <view class="book-author" bindtap="goToAuthor">
           <view class="author-avatar" style="background: {{authorAvatar}}"></view>
           <text>{{bookDetail.author}}</text>
         </view>
+      </view>
+
+      <view class="book-rating">
+        <view wx:if="{{!isLoading}}">
+          <text class="rating-score">{{localRating > 0 ? localRating : '暂无评分'}}</text>
+          <text class="rating-count" wx:if="{{localRatingCount > 0}}">{{localRatingCount}}人评价</text>
+        </view>
+        <view wx:else class="loading">加载中...</view>
       </view>
       
       <view class="book-tags">
@@ -25,11 +30,7 @@
       <view class="section">
         <text class="section-title">读啥鸭评价</text>
         <text class="book-review">{{bookDetail.review}}</text>
-      </view>
-      
-      <view class="book-rating">
-        <text class="rating-score">{{bookDetail.rating}}</text>
-        <text class="rating-count">{{bookDetail.ratingCount}}人评分</text>
+        <text class="book-grade">评级：{{bookDetail.grade || '无'}}</text>
       </view>
       
       <view class="section">
@@ -37,10 +38,30 @@
         <text class="book-list">{{bookDetail.bookListContent}}</text>
       </view>
       
-      <view class="button-group">
-        <button class="primary-btn" bindtap="goToSource">查看源地址</button>
-        <button class="secondary-btn" bindtap="showRatingModal">评分</button>
+      <!-- 添加评论列表区域 -->
+      <view class="section comments-section">
+        <text class="section-title">评论列表</text>
+        <view wx:if="{{comments.length === 0}}" class="no-comments">
+          暂无评论
+        </view>
+        <view wx:for="{{comments}}" wx:key="id" class="comment-item">
+          <view class="comment-header">
+            <text class="comment-author">{{item.author}}</text>
+            <text class="comment-rating">{{item.rating}}分</text>
+          </view>
+          <text class="comment-content">{{item.content}}</text>
+        </view>
       </view>
     </view>
   </scroll-view>
+  <view class="button-group">
+    <button class="primary-btn" bindtap="goToSource">查看书单</button>
+    <button class="secondary-btn" bindtap="showRatingModal">评分</button>
+  </view>
 </view>
+
+<rating-modal 
+  isVisible="{{isRatingModalVisible}}" 
+  bind:cancel="hideRatingModal" 
+  bind:confirm="submitRating"
+/>

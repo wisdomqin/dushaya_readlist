@@ -173,8 +173,8 @@ page {
 }
 
 .grade-image-container {
-  width: 70rpx;  /* 减小容器大小 */
-  height: 70rpx; /* 减小容器大小 */
+  width: 60rpx;  /* 减小容器大小 */
+  height: 60rpx; /* 减小容器大小 */
   border-radius: 50%;
   overflow: hidden;
   background-color: #fff;
@@ -186,8 +186,8 @@ page {
 }
 
 .grade-image {
-  width: 80rpx;  /* 减小图片大小 */
-  height: 80rpx; /* 减小图片大小 */
+  width: 70rpx;  /* 减小图片大小 */
+  height: 70rpx; /* 减小图片大小 */
   object-fit: contain;
 }
 

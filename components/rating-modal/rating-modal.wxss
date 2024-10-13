@@ -1,0 +1,50 @@
+.rating-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx;
+  width: 80%;
+  max-width: 600rpx;
+}
+
+.modal-header {
+  margin-bottom: 30rpx;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.rating-section, .comment-section {
+  margin-bottom: 30rpx;
+}
+
+textarea {
+  width: 100%;
+  height: 200rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 8rpx;
+  padding: 10rpx;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-btn, .confirm-btn {
+  margin-left: 20rpx;
+}
