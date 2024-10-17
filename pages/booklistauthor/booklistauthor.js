@@ -54,5 +54,21 @@ Page({
     wx.navigateTo({
       url: `/pages/booklistinfo/booklistinfo?id=${id}`
     });
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: `${this.data.author}的书单`,
+      path: `/pages/booklistauthor/booklistauthor?author=${encodeURIComponent(this.data.author)}`,
+      imageUrl: '/path/to/share/image.jpg' // 可选，自定义分享图片
+    }
+  },
+
+  onShareTimeline: function () {
+    return {
+      title: `${this.data.author}的书单`,
+      query: `author=${encodeURIComponent(this.data.author)}`,
+      imageUrl: '/path/to/share/image.jpg' // 可选，自定义分享图片
+    }
   }
 });

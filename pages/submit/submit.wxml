@@ -1,59 +1,79 @@
 <view class="safe-area-container">
   <safe-area-top></safe-area-top>
   <view class="page-container">
-    <view class="content" wx:if="{{!showConfirmation}}">
-      <view class="header">
-        <text class="title">分享您的书单</text>
-        <text class="subtitle">让更多人发现好书</text>
-      </view>
-      <form bindsubmit="submitBookList">
-        <view class="input-container">
-          <icon class="input-icon" type="search" size="20"></icon>
-          <input class="url-input" type="text" value="{{url}}" placeholder="请复制粘贴书单网址" bindinput="inputUrl" />
+    <view class="content-wrapper">
+      <view class="content {{showConfirmation ? 'hidden' : ''}}">
+        <view class="header">
+          <text class="title">分享您的书单</text>
+          <text class="subtitle">让更多人发现好书</text>
         </view>
-        <button form-type="submit" class="submit-btn">提交书单</button>
-      </form>
-    </view>
-    <scroll-view scroll-y class="confirmation-scroll" wx:if="{{showConfirmation}}">
-      <view class="confirmation">
-        <view class="book-info">
-          <view class="info-item grade-item">
-            <text class="info-label">评级：</text>
-            <view class="grade-content">
-              <view class="book-grade">{{bookData.grade}}</view>
-              <view class="grade-badge {{bookData.grade ? 'show' : ''}}">
-                <image class="badge-image" src="/images/{{bookData.grade === '典藏' ? 'classic.png' : bookData.grade === '神' ? 'god.png' : bookData.grade === '普通' ? 'simple.png' : bookData.grade === '有意思' ? 'interesting.png' : 'default.png'}}" mode="aspectFit"></image>
+        <form bindsubmit="submitBookList">
+          <view class="input-container">
+            <icon class="input-icon" type="search" size="20"></icon>
+            <input class="url-input" type="text" value="{{url}}" placeholder="请复制粘贴书单网址" bindinput="inputUrl" />
+          </view>
+          <button form-type="submit" class="submit-btn">提交书单</button>
+        </form>
+      </view>
+      
+      <!-- 贴近提交框的信息 -->
+      <view class="near-content-info {{showConfirmation ? 'hidden' : ''}}">
+        <text class="info-text main-info">目前读啥鸭隔一段时间（几十分钟）会自动抓取一些书单内容。</text>
+      </view>
+
+      <scroll-view scroll-y class="confirmation-scroll {{showConfirmation ? 'visible' : ''}}" wx:if="{{showConfirmation}}">
+        <view class="confirmation">
+          <view class="book-info">
+            <view class="info-item grade-item">
+              <text class="info-label">评级：</text>
+              <view class="grade-content">
+                <view class="book-grade">{{bookData.grade}}</view>
+                <view class="grade-badge {{bookData.grade ? 'show' : ''}}">
+                  <image class="badge-image" src="{{gradeImages[bookData.grade] || gradeImages['default']}}" mode="aspectFit"></image>
+                </view>
               </view>
             </view>
+            <!-- 读啥鸭评价 -->
+            <view class="info-item">
+              <text class="info-label">读啥鸭评价：</text>
+              <view class="book-review">{{bookData.review}}</view>
+            </view>
+            <!-- 可编辑字段 -->
+            <view class="info-item">
+              <text class="info-label">书单名称：</text>
+              <input class="book-title" value="{{bookData.title}}" bindinput="updateBookData" data-field="title" placeholder="请输入书名" />
+            </view>
+            <view class="info-item">
+              <text class="info-label">书单作者：</text>
+              <input class="book-author" value="{{bookData.author}}" bindinput="updateBookData" data-field="author" placeholder="请输入作者" />
+            </view>
+            <view class="info-item">
+              <text class="info-label">简介：</text>
+              <textarea class="book-description" value="{{bookData.description}}" bindinput="updateBookData" data-field="description" placeholder="请输入简介" auto-height />
+            </view>
+            <view class="info-item">
+              <text class="info-label">标签：</text>
+              <input class="book-tags" value="{{bookData.tags}}" bindinput="updateBookData" data-field="tags" placeholder="请输入标签，用逗号分隔" />
+            </view>
           </view>
-          <!-- 读啥鸭评价 -->
-          <view class="info-item">
-            <text class="info-label">读啥鸭评价：</text>
-            <view class="book-review">{{bookData.review}}</view>
-          </view>
-          <!-- 可编辑字段 -->
-          <view class="info-item">
-            <text class="info-label">书单名称：</text>
-            <input class="book-title" value="{{bookData.title}}" bindinput="updateBookData" data-field="title" placeholder="请输入书名" />
-          </view>
-          <view class="info-item">
-            <text class="info-label">书单作者：</text>
-            <input class="book-author" value="{{bookData.author}}" bindinput="updateBookData" data-field="author" placeholder="请输入作者" />
-          </view>
-          <view class="info-item">
-            <text class="info-label">简介：</text>
-            <textarea class="book-description" value="{{bookData.description}}" bindinput="updateBookData" data-field="description" placeholder="请输入简介" auto-height />
-          </view>
-          <view class="info-item">
-            <text class="info-label">标签：</text>
-            <input class="book-tags" value="{{bookData.tags}}" bindinput="updateBookData" data-field="tags" placeholder="请输入标签，用逗号分隔" />
+          <view class="button-group">
+            <button class="cancel-btn" bindtap="cancelSubmit">取消</button>
+            <button class="confirm-btn" bindtap="confirmSubmit">确认</button>
           </view>
         </view>
-        <view class="button-group">
-          <button class="cancel-btn" bindtap="cancelSubmit">取消</button>
-          <button class="confirm-btn" bindtap="confirmSubmit">确认</button>
+      </scroll-view>
+      
+      <!-- 底部信息 -->
+      <view class="footer-info {{showConfirmation ? 'hidden' : ''}}">
+        <view class="secondary-info">
+          <text class="info-text">做自己的产品，带着偏见。</text>
+          <text class="info-text">我是BISHENG平台的产品负责人，大模型的加持让我0基础成为了独立开发者。</text>
+          <text class="info-text">"读啥鸭"是我第一款独立开发的产品，很开心能跟大家分享我的乐趣~不为其他，只为乐趣，真好！</text>
+          <text class="info-text">我的灵感箱里还有几十个好玩的想法，来日方长~</text>
+          <text class="info-text">关于  读啥鸭、独立开发、大模型、BISHENG平台 有想聊聊的可以到公众号“七吟覃”找到进群方式</text>
+          <text class="info-text copyable" bindtap="copyToClipboard" data-text="七吟覃">七吟覃</text>
         </view>
       </view>
-    </scroll-view>
+    </view>
   </view>
 </view>

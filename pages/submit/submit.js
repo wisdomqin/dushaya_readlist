@@ -1,3 +1,5 @@
+import { gradeImages } from '../../config.js';
+
 Page({
   data: {
     url: '',
@@ -9,6 +11,7 @@ Page({
     originalBookData: null,
     isSubmitting: false,
     isTypingComplete: false,
+    gradeImages: gradeImages,
   },
 
   inputUrl(e) {
@@ -81,7 +84,7 @@ Page({
     }
   },
 
-  // 步骤2：拿到内容后用打字机的形式展示获取的内容
+  // 步骤2：拿到内容后用打字机的形式���示获取的内容
   startTypingEffect() {
     console.log('开始打字机效果');
     this.setData({
@@ -219,4 +222,34 @@ Page({
       delta: 1
     });
   },
+
+  copyToClipboard(e) {
+    const text = e.currentTarget.dataset.text;
+    wx.setClipboardData({
+      data: text,
+      success: function() {
+        wx.showModal({
+          title: '复制成功',
+          content: '公众号名称"七吟覃"已复制到剪贴板',
+          showCancel: false
+        });
+      }
+    });
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: '提交新书单',
+      path: '/pages/submit/submit',
+      imageUrl: '/path/to/share/image.jpg' // 可选，自定义分享图片
+    }
+  },
+
+  onShareTimeline: function () {
+    return {
+      title: '来提交新书单吧',
+      query: '',
+      imageUrl: '/path/to/share/image.jpg' // 可选，自定义分享图片
+    }
+  }
 });

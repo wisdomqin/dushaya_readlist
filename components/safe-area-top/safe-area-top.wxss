@@ -1,0 +1,19 @@
+.safe-area-top {
+  position: relative;
+  background-color: transparent;
+}
+
+.logo {
+  position: absolute;
+  left: 30rpx;
+  bottom: 20rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FF9800;
+  text-shadow: 
+    -1rpx -1rpx 0 #fff,  
+    1rpx -1rpx 0 #fff,
+    -1rpx 1rpx 0 #fff,
+     1rpx 1rpx 0 #fff;
+  font-family: 'YouYuan', 'STHupo', 'STXinwei', 'STCaiyun', sans-serif;
+}

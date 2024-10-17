@@ -238,5 +238,21 @@ Page({
   onUnload() {
     // 页面卸载时不清除本地缓存
     // wx.removeStorageSync(`bookList_${this.bookListId}`);
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: this.data.bookDetail.title || '精彩书单',
+      path: `/pages/booklistinfo/booklistinfo?id=${this.data.bookDetail._id}`,
+      imageUrl: '/path/to/share/image.jpg' // 可选，自定义分享图片
+    }
+  },
+
+  onShareTimeline: function () {
+    return {
+      title: this.data.bookDetail.title || '精彩书单',
+      query: `id=${this.data.bookDetail._id}`,
+      imageUrl: '/path/to/share/image.jpg' // 可选，自定义分享图片
+    }
   }
 });

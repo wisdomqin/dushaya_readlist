@@ -40,6 +40,14 @@ App({
     }
   },
 
+  onShow: function() {
+    // 添加这个新方法来启用分享功能
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    });
+  },
+
   // 保留原有的 initCloud 方法
   initCloud: function(retryCount = 0) {
     if (!wx.cloud) {

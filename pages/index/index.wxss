@@ -1,5 +1,5 @@
 page {
-  background-color: #f5f5f5;
+  background-color: rgb(250, 249, 241);
   color: #333;
 }
 
@@ -119,24 +119,25 @@ page {
   position: fixed;
   right: 40rpx;
   bottom: 40rpx;
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   background-color: #333;
+  border: 3rpx solid #fff; /* 增加白色边框 */
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.15);
-  z-index: 1000; /* 确保按钮在最上层 */
+  font-size: 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.2); /* 增强阴影效果 */
+  z-index: 1000;
 }
 
 .book-list-container {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 120rpx; /* 为悬浮按钮留出空间 */
+  padding-bottom: 160rpx; /* 增加底部内边距，为底部按钮留出空间 */
 }
 
 .no-data {
@@ -195,4 +196,90 @@ page {
   font-size: 18rpx; /* 稍微减小字体大小 */
   color: #999;
   margin-top: 4rpx;
+}
+
+/* 在文件末尾添加以下样式 */
+
+.refresher-container {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(250, 249, 241);
+}
+
+.refresher-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.refresher-text {
+  font-size: 24rpx;
+  color: #666;
+  text-align: center;
+  line-height: 1.4;
+  padding: 0 40rpx;
+}
+
+.bottom-container {
+  position: fixed;
+  bottom: 40rpx;
+  left: 40rpx;
+  right: 140rpx; /* 为添加按钮留出空间 */
+  display: flex;
+  align-items: center;
+  z-index: 999;
+}
+
+.tag-container {
+  display: flex;
+  flex: 1;
+  overflow-x: auto; /* 允许标签横向滚动 */
+  white-space: nowrap;
+  margin-right: 20rpx; /* 为搜索按钮留出空间 */
+}
+
+.tag-btn {
+  display: inline-flex; /* 改为内联弹性布局 */
+  align-items: center;
+  justify-content: center;
+  margin-right: 10rpx;
+  padding: 0 20rpx;
+  background-color: #333;
+  border: 1rpx solid #333;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: #fff;
+  height: 80rpx;
+  min-width: 120rpx; /* 设置最小宽度 */
+}
+
+.tag-btn.selected {
+  background-color: #fff;
+  color: #333;
+}
+
+.search-btn {
+  flex-shrink: 0;
+  padding: 0 25rpx;
+  background-color: #333;
+  border: 3rpx solid #fff; /* 增加白色边框 */
+  border-radius: 40rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.2); /* 添加阴影效果 */
+}
+
+/* 可以添加悬停效果（仅在支持触摸的设备上有效） */
+.search-btn:active,
+.submit-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
 }

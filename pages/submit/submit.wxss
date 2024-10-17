@@ -21,22 +21,7 @@ button {
   bottom: 0;
   display: flex;
   flex-direction: column;
-  background-color: #e2ecf7;
-  background-image: 
-    linear-gradient(to right, rgba(100, 100, 100, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(100, 100, 100, 0.1) 1px, transparent 1px),
-    radial-gradient(circle, #4a90e2 2px, transparent 2px),
-    linear-gradient(135deg, #84d0ff 0%, #4a90e2 100%);
-  background-size: 
-    20px 20px,
-    20px 20px,
-    60px 60px,
-    100% 100%;
-  background-position: 
-    0 0,
-    0 0,
-    30px 30px,
-    0 0;
+  background-color: rgb(250, 249, 241); /* 改为纯白色背景 */
   z-index: 0;
 }
 
@@ -44,7 +29,7 @@ button {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   overflow: hidden;
   padding: 20rpx 0;
@@ -73,6 +58,16 @@ button {
   position: relative;
   z-index: 2;
   backdrop-filter: blur(10px);
+  margin-bottom: 20rpx;
+}
+
+.near-content-info {
+  width: 85%;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
 }
 
 .header {
@@ -308,4 +303,101 @@ button {
 
 .grade-content .book-input:focus {
   box-shadow: 0 0 10rpx rgba(74, 144, 226, 0.5);
+}
+
+/* 在文件末尾添加以下样式 */
+
+.content.move-up,
+.confirmation-scroll.move-up {
+  transform: translateY(-33.33%);
+  transition: transform 0.3s ease-out;
+}
+
+.footer-info {
+  position: relative; /* 改为相对定位 */
+  width: 85%; /* 与 content 宽度一致 */
+  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  margin-top: auto; /* 将 footer-info 推到底部 */
+}
+
+.main-info {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.secondary-info {
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.info-text {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+  line-height: 1.4;
+  margin-bottom: 8rpx;
+}
+
+.copyable {
+  color: #4a90e2;
+  text-decoration: underline;
+}
+
+.content-wrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-wrapper.move-up {
+  transform: translateY(-100%);
+}
+
+.confirmation-scroll {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.confirmation-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-info {
+  width: 85%;
+  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.footer-info.hidden {
+  opacity: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+.content, .near-content-info, .footer-info {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.content.hidden, .near-content-info.hidden, .footer-info.hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  position: absolute;
+  pointer-events: none;
 }

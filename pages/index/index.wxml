@@ -6,11 +6,16 @@
     bindscrolltolower="loadMore"
     refresher-enabled="{{true}}"
     refresher-threshold="{{100}}"
-    refresher-default-style="black"
+    refresher-default-style="none"
     refresher-background="#f5f5f5"
     refresher-triggered="{{isRefreshing}}"
     bindrefresherrefresh="onPullDownRefresh"
   >
+    <view slot="refresher" class="refresher-container">
+      <view class="refresher-content">
+        <text class="refresher-text">大家多多贡献，读啥鸭也会隔几十分钟自动更新书单~</text>
+      </view>
+    </view>
     <view wx:if="{{bookLists.length === 0}}" class="no-data">
       <text>暂无书单，快去添加吧！</text>
     </view>
@@ -24,7 +29,7 @@
           <text class="book-title">{{item.title}}</text>
           <view class="book-grade-container">
             <view class="grade-image-container">
-              <image class="grade-image" src="/images/{{item.grade === '典藏' ? 'classic.png' : item.grade === '神书' ? 'god.png' : item.grade === '普通' ? 'simple.png' : item.grade === '有意思' ? 'interesting.png' : 'default.png'}}" mode="aspectFit"></image>
+              <image class="grade-image" src="{{gradeImages[item.grade] || gradeImages['default']}}" mode="aspectFit"></image>
             </view>
             <view class="book-grade">{{item.grade || '无评级'}}</view>
           </view>
@@ -39,5 +44,19 @@
       </view>
     </view>
   </scroll-view>
+  <view class="bottom-container">
+    <view class="tag-container">
+      <view 
+        wx:for="{{randomTags}}" 
+        wx:key="*this" 
+        class="tag-btn {{selectedTag === item ? 'selected' : ''}}"
+        bindtap="onTagTap"
+        data-tag="{{item}}"
+      >
+        {{item}}
+      </view>
+    </view>
+    <view class="search-btn" bindtap="goToSearch">搜索</view>
+  </view>
   <view class="submit-btn" bindtap="goToSubmit">+</view>
 </view>

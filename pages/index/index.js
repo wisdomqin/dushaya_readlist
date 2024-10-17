@@ -1,9 +1,15 @@
+import { gradeImages } from '../../config.js';
+
 const app = getApp()
 
 Page({
     data: {
       bookLists: [],
-      isRefreshing: false
+      isRefreshing: false,
+      allTags: [],
+      randomTags: [],
+      selectedTag: null,
+      gradeImages: gradeImages,
     },
 
     onLoad: function() {
@@ -34,47 +40,90 @@ Page({
       console.log('下拉刷新触发');
       this.setData({ isRefreshing: true });
       this.getBookLists();
+      this.getRandomTags(); // 添加这行来刷新标签
     },
 
-    getBookLists: function() {
+    getBookLists: function(tag = null) {
       console.log('开始获取书单数据');
       wx.showLoading({
         title: '加载中...',
       });
 
       const db = wx.cloud.database();
-      console.log('开始调用数据库查询');
-      db.collection('bookLists')
-        .orderBy('createdAt', 'desc')  // 添加这行，按创建时间降序排序
-        .limit(20)
-        .get()
-        .then(res => {
-          console.log('获取书单数据成功:', res);
-          if (res.data && res.data.length > 0) {
-            const updatedBookLists = res.data.map(item => {
-              // 从本地缓存获取评分数据
-              const localData = wx.getStorageSync(`bookList_${item._id}`);
-              if (localData) {
-                item.rating = localData.rating;
-                item.ratingCount = localData.ratingCount;
-              }
-              console.log(`书单 "${item.title}" 的完整数据:`, item);
-              return item;
-            });
-            this.setData({
-              bookLists: updatedBookLists
-            });
-            console.log('设置书单数据成功，数量:', updatedBookLists.length);
-          } else {
-            console.log('获取到的书单数据为空');
-          }
-        }).catch(err => {
-          console.error('获取书单失败：', err);
-        }).finally(() => {
-          wx.hideLoading();
-          this.setData({ isRefreshing: false });
-          wx.stopPullDownRefresh();  // 添加这行，停止下拉刷新动画
+      let query = db.collection('bookLists').orderBy('createdAt', 'desc');
+
+      if (tag) {
+        query = query.where({
+          tags: db.command.all([tag])
         });
+      }
+
+      query.limit(30).get().then(res => {
+        console.log('获取书单数据成功:', res);
+        if (res.data && res.data.length > 0) {
+          const updatedBookLists = res.data.map(item => {
+            const localData = wx.getStorageSync(`bookList_${item._id}`);
+            if (localData) {
+              item.rating = localData.rating;
+              item.ratingCount = localData.ratingCount;
+            }
+            return item;
+          });
+          this.setData({
+            bookLists: updatedBookLists
+          });
+        } else {
+          console.log('获取到的书单数据为空');
+        }
+      }).catch(err => {
+        console.error('获取书单失败：', err);
+      }).finally(() => {
+        wx.hideLoading();
+        this.setData({ isRefreshing: false });
+        wx.stopPullDownRefresh();
+      });
+    },
+
+    getRandomTags: function() {
+      const db = wx.cloud.database();
+      db.collection('bookLists').field({
+        tags: true
+      }).get().then(res => {
+        let allTags = [];
+        res.data.forEach(item => {
+          allTags = allTags.concat(item.tags);
+        });
+        allTags = [...new Set(allTags)]; // 去重
+        const randomTags = this.getRandomElements(allTags, 3);
+        this.setData({
+          allTags,
+          randomTags
+        });
+      }).catch(err => {
+        console.error('获取标签失败：', err);
+      });
+    },
+
+    getRandomElements: function(arr, count) {
+      let shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+      while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+      }
+      return shuffled.slice(min);
+    },
+
+    onTagTap: function(e) {
+      const tag = e.currentTarget.dataset.tag;
+      if (this.data.selectedTag === tag) {
+        this.setData({ selectedTag: null });
+        this.getBookLists();
+      } else {
+        this.setData({ selectedTag: tag });
+        this.getBookLists(tag);
+      }
     },
 
     goToDetail(e) {
@@ -95,8 +144,8 @@ Page({
     },
 
     onShow: function() {
-      // 每次显示页面时重新获取书单数据
       this.getBookLists();
+      this.getRandomTags();
     },
 
     onReady: function() {
@@ -108,6 +157,12 @@ Page({
       // 或者保留它，但不设置 containerStyle
       this.setData({
         containerStyle: '' // 清空之前设置的样式
+      });
+    },
+
+    goToSearch() {
+      wx.navigateTo({
+        url: '/pages/search/search'
       });
     }
 });

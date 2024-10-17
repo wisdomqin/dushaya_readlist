@@ -1,2 +1,4 @@
 <!-- components/safe-area-top/safe-area-top.wxml -->
-<view style="height: {{height}}px;"></view>
+<view class="safe-area-top" style="height: {{height}}px;">
+  <text class="logo">读啥鸭</text>
+</view>

@@ -1,0 +1,151 @@
+.search-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(250, 249, 241);
+}
+
+.search-bar {
+  padding: 20rpx;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 40rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+}
+
+.search-btn {
+  margin-left: 20rpx;
+  padding: 0 100rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #333;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+}
+
+.search-results {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+  padding: 40rpx;
+}
+
+.book-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 20rpx;
+  box-shadow: 0 8rpx 20rpx rgba(0,0,0,0.1);
+}
+
+.duck-review {
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.review-content {
+  font-size: 36rpx;
+  color: #333;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.review-title {
+  font-size: 24rpx;
+  color: #666;
+  text-align: right;
+  display: block;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-title-grade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.book-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.book-author, .book-tags, .book-description {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.book-rating {
+  margin-top: 20rpx;
+  text-align: right;
+}
+
+.rating-score {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #ffc107;
+}
+
+.rating-count {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 10rpx;
+}
+
+.highlight {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.book-grade-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grade-image-container {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2rpx solid #e0e0e0;
+}
+
+.grade-image {
+  width: 80rpx;
+  height: 80rpx;
+  object-fit: contain;
+}
+
+.book-grade {
+  font-size: 18rpx;
+  color: #999;
+  margin-top: 4rpx;
+}

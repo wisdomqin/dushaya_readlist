@@ -1,0 +1,39 @@
+<safe-area-top></safe-area-top>
+<view class="search-container">
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索书单" bindinput="onSearch" bindconfirm="onSearchConfirm" value="{{searchQuery}}"/>
+    <button class="search-btn" bindtap="onSearchConfirm">搜索</button>
+  </view>
+  <scroll-view scroll-y class="search-results">
+    <view wx:if="{{searchResults.length === 0}}" class="no-data">
+      <text>暂无搜索结果</text>
+    </view>
+    <view wx:for="{{searchResults}}" wx:key="_id" class="book-card" bindtap="goToDetail" data-id="{{item._id}}">
+      <view class="duck-review">
+        <rich-text class="review-content" nodes='"{{item.highlightedReview}}"'></rich-text>
+        <text class="review-title">——读啥鸭评价</text>
+      </view>
+      <view class="book-info">
+        <view class="book-title-grade">
+          <rich-text class="book-title" nodes="{{item.highlightedTitle}}"></rich-text>
+          <view class="book-grade-container">
+            <view class="grade-image-container">
+              <image class="grade-image" src="{{gradeImages[item.grade] || gradeImages['default']}}" mode="aspectFit"></image>
+            </view>
+            <view class="book-grade">{{item.grade || '无评级'}}</view>
+          </view>
+        </view>
+        <rich-text class="book-author" nodes="作者：{{item.highlightedAuthor}}"></rich-text>
+        <view class="book-tags">
+          标签：
+          <rich-text wx:for="{{item.highlightedTags}}" wx:key="*this" wx:for-item="tag" nodes="{{tag}}"></rich-text>
+        </view>
+        <rich-text class="book-description" nodes="简介：{{item.highlightedDescription}}"></rich-text>
+      </view>
+      <view class="book-rating" wx:if="{{item.rating > 0}}">
+        <text class="rating-score">{{item.rating}}</text>
+        <text class="rating-count" wx:if="{{item.ratingCount > 0}}">{{item.ratingCount}}人评分</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

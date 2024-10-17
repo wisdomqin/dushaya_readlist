@@ -5,6 +5,7 @@
     "pages/booklistlabel/booklistlabel",
     "pages/booklistinfo/booklistinfo",
     "pages/web-view/web-view",
+    "pages/search/search",
     "pages/booklistauthor/booklistauthor"
   ],
   "window": {
@@ -30,8 +31,17 @@
   "lazyCodeLoading": "requiredComponents",
   "cloud": true,
   "permission": {
-    "scope.vibrate": {}
+    "scope.vibrate": {},
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
+  "navigateToMiniProgramAppIdList": [
+    "wxe5f52902cf4de896"
+  ],
   "usingComponents": {
     "safe-area-top": "/components/safe-area-top/safe-area-top"
   }
